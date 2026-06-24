@@ -1,0 +1,215 @@
+@import "tailwindcss";
+
+/* ── Design Tokens ─────────────────────────────────── */
+:root {
+  --bg:          #FAF7F2;
+  --surface:     #F0EAE1;
+  --text:        #1A1218;
+  --text-muted:  #8B6F6F;
+  --gold:        #B5294E;
+  --gold-light:  #D4547A;
+  --violet:      #9B6E8B;
+  --border:      #DDD0C8;
+  --overlay:     rgba(250, 247, 242, 0.88);
+
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body:    'Space Grotesk', sans-serif;
+  --font-label:   'Syncopate', sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ── Reset & Base ──────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  cursor: none;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar ─────────────────────────────────────── */
+::-webkit-scrollbar { width: 2px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #B5294E; border-radius: 1px; }
+
+/* ── Selection ─────────────────────────────────────── */
+::selection { background: var(--gold); color: var(--bg); }
+
+/* ── Typography Utilities ──────────────────────────── */
+.font-display { font-family: var(--font-display); }
+.font-label   { font-family: var(--font-label); }
+
+/* ── Keyframes ─────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33%       { transform: translateY(-12px) rotate(0.5deg); }
+  66%       { transform: translateY(-6px) rotate(-0.5deg); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes pulse-gold {
+  0%, 100% { opacity: 0.6; }
+  50%       { opacity: 1; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10%       { transform: translate(-1%, -1%); }
+  20%       { transform: translate(1%, 1%); }
+  30%       { transform: translate(-1%, 1%); }
+  40%       { transform: translate(1%, -1%); }
+  50%       { transform: translate(-1%, 0); }
+  60%       { transform: translate(0, 1%); }
+  70%       { transform: translate(1%, 0); }
+  80%       { transform: translate(0, -1%); }
+  90%       { transform: translate(-1%, 1%); }
+}
+
+/* ── Film Grain Overlay ────────────────────────────── */
+.grain-overlay {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025;
+  pointer-events: none;
+  animation: grain 0.5s steps(1) infinite;
+  z-index: 9999;
+}
+
+/* ── Marquee ───────────────────────────────────────── */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 24s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track-reverse {
+  display: flex;
+  width: max-content;
+  animation: marquee-reverse 30s linear infinite;
+  will-change: transform;
+}
+
+/* ── Gradient Text ─────────────────────────────────── */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #B5294E, #D4547A, #B5294E);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* ── Glow Effects ──────────────────────────────────── */
+.glow-gold {
+  text-shadow: 0 0 40px rgba(181, 41, 78, 0.3), 0 0 80px rgba(181, 41, 78, 0.15);
+}
+
+/* ── Section Base ──────────────────────────────────── */
+.section {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ── Horizontal Rule ───────────────────────────────── */
+.hr-gold {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0.3;
+}
+
+/* ── Work Card Hover Colors ────────────────────────── */
+.work-card { position: relative; overflow: hidden; cursor: pointer; }
+.work-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-out-expo);
+}
+.work-card:hover::after { opacity: 1; }
+.work-card-1::after { background: linear-gradient(135deg, #B5294E 0%, #7A1030 100%); }
+.work-card-2::after { background: linear-gradient(135deg, #9B6E8B 0%, #6B3E6B 100%); }
+.work-card-3::after { background: linear-gradient(135deg, #C87878 0%, #8B3A50 100%); }
+.work-card-4::after { background: linear-gradient(135deg, #8B2950 0%, #5A1030 100%); }
+.work-card-5::after { background: linear-gradient(135deg, #7A4E7A 0%, #4A2450 100%); }
+.work-card-6::after { background: linear-gradient(135deg, #A05070 0%, #6B2045 100%); }
+
+/* ── Reduced motion ────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .marquee-track, .marquee-track-reverse { animation: none; }
+}
+
+/* ── Mobile cursor restore ─────────────────────────── */
+@media (hover: none) {
+  body { cursor: auto; }
+}
+
+/* ── Mobile layout overrides ───────────────────────── */
+@media (max-width: 767px) {
+  /* Disable film grain on mobile (performance) */
+  .grain-overlay { display: none; }
+
+  /* Ensure no horizontal scroll anywhere */
+  .section { overflow-x: hidden; }
+
+  /* Bigger touch targets for skill tags */
+  span[style*="padding: 6px"] { min-height: 36px; display: inline-flex; align-items: center; }
+
+  /* Marquee: slightly faster on small screens so it doesn't feel frozen */
+  .marquee-track         { animation-duration: 18s; }
+  .marquee-track-reverse { animation-duration: 22s; }
+}
+
+/* ── Smooth scroll behaviour ───────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* ── Laptop / mid-range refinements ────────────────── */
+@media (min-width: 768px) and (max-width: 1279px) {
+  /* Slightly tighter section padding on tablets/small laptops */
+  .section { overflow: visible; }
+}

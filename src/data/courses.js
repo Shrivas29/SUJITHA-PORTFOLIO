@@ -1,0 +1,167 @@
+export const COURSES = [
+  {
+    id: 'email-marketing',
+    number: '01',
+    title: 'Email Marketing',
+    tagline: 'Build campaigns that land in inboxes and minds.',
+    description: 'Learn to craft email campaigns that convert. From subject lines to automation, students master the full email funnel — all taught simply enough for a 10-year-old to run their first campaign.',
+    age: '10+',
+    duration: '4 Weeks · 2 Days/Week',
+    color: 'linear-gradient(135deg, #B5294E 0%, #7A1030 100%)',
+    accent: '#B5294E',
+    modules: [
+      {
+        week: 'Week 01',
+        title: 'What is Email Marketing?',
+        points: ['History and why email still wins', 'Types of emails: newsletters, promos, drip', 'Real-world examples broken down'],
+      },
+      {
+        week: 'Week 02',
+        title: 'Writing Your First Campaign',
+        points: ['Subject lines that get opened', 'Body copy that gets read', 'Designing a call-to-action'],
+      },
+      {
+        week: 'Week 03',
+        title: 'Tools & Automation',
+        points: ['Mailchimp for beginners', 'Setting up welcome sequences', 'Scheduling and timing your sends'],
+      },
+      {
+        week: 'Week 04',
+        title: 'Analytics & Growth',
+        points: ['Open rates, click rates explained', 'A/B testing subject lines', 'Growing and cleaning your list'],
+      },
+    ],
+  },
+  {
+    id: 'social-media-marketing',
+    number: '02',
+    title: 'Social Media Marketing',
+    tagline: 'Turn scrollers into followers, followers into fans.',
+    description: 'Master the art of social storytelling. Students learn to create content strategies across Instagram, YouTube, and beyond — and understand why some content goes viral while other content gets ignored.',
+    age: '10+',
+    duration: '4 Weeks · 2 Days/Week',
+    color: 'linear-gradient(135deg, #9B6E8B 0%, #6B3E6B 100%)',
+    accent: '#9B6E8B',
+    modules: [
+      {
+        week: 'Week 01',
+        title: 'The Social Media Landscape',
+        points: ['Instagram, YouTube, TikTok compared', 'How algorithms decide what you see', 'Finding where your audience lives'],
+      },
+      {
+        week: 'Week 02',
+        title: 'Content Creation Basics',
+        points: ['Photo and video fundamentals', 'Writing captions that spark engagement', 'Hashtag strategy that actually works'],
+      },
+      {
+        week: 'Week 03',
+        title: 'Building a Content Calendar',
+        points: ['Planning posts a month in advance', 'Tools: Canva and Buffer walkthrough', 'Consistency vs. chasing virality'],
+      },
+      {
+        week: 'Week 04',
+        title: 'Analytics & Growth',
+        points: ['Reading your insights dashboard', 'What separates viral content from flops', 'Collaborations and brand partnerships'],
+      },
+    ],
+  },
+  {
+    id: 'website-building',
+    number: '03',
+    title: 'Website Building',
+    tagline: 'From blank page to live website in four weeks.',
+    description: 'No coding required. Students build a real website from scratch using no-code tools, learning design thinking, user experience, and what makes people stay on a site — or leave in two seconds.',
+    age: '10+',
+    duration: '4 Weeks · 2 Days/Week',
+    color: 'linear-gradient(135deg, #C87060 0%, #8B4050 100%)',
+    accent: '#C87060',
+    modules: [
+      {
+        week: 'Week 01',
+        title: 'How the Web Works',
+        points: ['What is a website, domain, and hosting?', 'Browsers and how they read pages', 'Introduction to no-code tools'],
+      },
+      {
+        week: 'Week 02',
+        title: 'Design Fundamentals',
+        points: ['Colour, typography, and layout basics', 'Wireframing your pages on paper', 'What makes great user experience'],
+      },
+      {
+        week: 'Week 03',
+        title: 'Building Your Site',
+        points: ['Using Wix or Webflow step by step', 'Homepage, About, Contact pages', 'Making it look good on mobile'],
+      },
+      {
+        week: 'Week 04',
+        title: 'Launch & Promote',
+        points: ['Publishing your site live', 'Basic SEO so Google can find you', 'Sharing your site with the world'],
+      },
+    ],
+  },
+  {
+    id: 'paid-marketing',
+    number: '04',
+    title: 'Paid Marketing',
+    tagline: 'Spend smart. Reach further. Measure everything.',
+    description: 'Understand how online advertising works. Students learn the fundamentals of paid campaigns on Google and Meta, with real budget simulations that teach them to think like a media buyer.',
+    age: '12+',
+    duration: '4 Weeks · 2 Days/Week',
+    color: 'linear-gradient(135deg, #8B2950 0%, #5A1030 100%)',
+    accent: '#8B2950',
+    modules: [
+      {
+        week: 'Week 01',
+        title: 'What is Paid Advertising?',
+        points: ['Search ads vs. display ads', 'How the ad auction works', 'Why some ads cost more than others'],
+      },
+      {
+        week: 'Week 02',
+        title: 'Google Ads Basics',
+        points: ['Setting up your first search campaign', 'Keyword targeting and match types', 'Writing ad copy that earns clicks'],
+      },
+      {
+        week: 'Week 03',
+        title: 'Meta Ads (Facebook & Instagram)',
+        points: ['Audience targeting and custom audiences', 'Image and video ad formats', 'Setting budgets and schedules'],
+      },
+      {
+        week: 'Week 04',
+        title: 'Measuring ROI',
+        points: ['What is ROAS and why it matters', 'Reading your ad performance dashboard', 'Optimising campaigns for real results'],
+      },
+    ],
+  },
+  {
+    id: 'seo-optimisation',
+    number: '05',
+    title: 'SEO Optimisation',
+    tagline: 'Get found on Google — without paying for ads.',
+    description: 'Search Engine Optimisation demystified. Students learn how Google works under the hood and how to make any website rank higher, attract the right visitors, and stay there long term.',
+    age: '10+',
+    duration: '4 Weeks · 2 Days/Week',
+    color: 'linear-gradient(135deg, #7A4E7A 0%, #4A2450 100%)',
+    accent: '#7A4E7A',
+    modules: [
+      {
+        week: 'Week 01',
+        title: 'How Search Engines Work',
+        points: ['Crawling, indexing, and ranking explained', 'What Google actually looks for', 'The anatomy of a search results page'],
+      },
+      {
+        week: 'Week 02',
+        title: 'Keyword Research',
+        points: ['Finding what your audience searches for', 'Short-tail vs. long-tail keywords', 'Free tools: Google Search Console'],
+      },
+      {
+        week: 'Week 03',
+        title: 'On-Page SEO',
+        points: ['Title tags and meta descriptions', 'Writing content Google loves', 'Internal linking strategy'],
+      },
+      {
+        week: 'Week 04',
+        title: 'Tracking & Improving',
+        points: ['Google Analytics for beginners', 'Monitoring your keyword rankings', 'Building backlinks the ethical way'],
+      },
+    ],
+  },
+]
