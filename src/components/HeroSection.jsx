@@ -150,9 +150,9 @@ export default function HeroSection() {
           lineHeight: isMobile ? 2 : 1,
         }}>
           {isMobile ? (
-            <>Digital Strategist<br />Growth Marketer<br />Data-Driven Thinker</>
+            <>Digital Marketing Influencer<br />Growth Marketer<br />Data-Driven Thinker</>
           ) : (
-            <>Digital Strategist&nbsp;&nbsp;·&nbsp;&nbsp;Growth Marketer&nbsp;&nbsp;·&nbsp;&nbsp;Data-Driven Thinker</>
+            <>Digital Marketing Influencer&nbsp;&nbsp;·&nbsp;&nbsp;Growth Marketer&nbsp;&nbsp;·&nbsp;&nbsp;Data-Driven Thinker</>
           )}
         </p>
       </motion.div>

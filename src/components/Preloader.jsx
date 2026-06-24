@@ -67,7 +67,7 @@ class Particle {
 
 // ─── Sequence ────────────────────────────────────────────────────────────────
 const SEQUENCE = [
-  { word: 'SUJITHA',  sub: 'DIGITAL MARKETING STRATEGIST',   color: { r: 181, g: 41,  b: 78  } },
+  { word: 'SUJITHA',  sub: 'DIGITAL MARKETING INFLUENCER',   color: { r: 181, g: 41,  b: 78  } },
   { word: 'STRATEGY', sub: 'DATA · PRECISION · RESULTS',     color: { r: 139, g: 111, b: 139 } },
   { word: 'GROWTH',   sub: 'BECAUSE NUMBERS TELL THE TRUTH', color: { r: 26,  g: 18,  b: 24  } },
 ]
@@ -174,7 +174,8 @@ export default function Preloader({ onComplete }) {
     }
 
     const timers = []
-    document.fonts.ready.then(() => {
+
+    const start = () => {
       loadWord(0)
       animate()
       SEQUENCE.forEach((_, i) => {
@@ -190,7 +191,14 @@ export default function Preloader({ onComplete }) {
           setTimeout(onComplete, FADE_MS)
         }, 250)
       }, SCATTER_AT))
-    })
+    }
+
+    // Wait for both fonts and full page load before beginning
+    const pageLoaded = document.readyState === 'complete'
+      ? Promise.resolve()
+      : new Promise(res => window.addEventListener('load', res, { once: true }))
+
+    Promise.all([document.fonts.ready, pageLoaded]).then(start)
 
     return () => {
       cancelAnimationFrame(S.current.animId)

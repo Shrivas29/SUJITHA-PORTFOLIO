@@ -10,7 +10,7 @@ const STATS = [
 
 const FRAGMENTS = [
   {
-    text: 'Sujitha M is a Digital Marketing Strategist working at the intersection of data, creativity, and measurable growth.',
+    text: 'Sujitha M is a Digital Marketing Influencer at the intersection of data, creativity, and measurable growth.',
     em: ['data', 'creativity', 'measurable growth'],
   },
   {
@@ -18,8 +18,8 @@ const FRAGMENTS = [
     em: ['analytical precision', 'strategies'],
   },
   {
-    text: 'Currently working remotely with rjp entrepreneurs, Sujitha collaborates globally on SEO, SEM, and e-commerce campaigns that deliver real, quantifiable results.',
-    em: ['SEO', 'SEM', 'real, quantifiable results'],
+    text: 'She teaches digital marketing to the next generation — making SEO, social media, and paid campaigns accessible to curious young minds worldwide.',
+    em: ['SEO', 'social media', 'paid campaigns'],
   },
 ]
 
@@ -288,7 +288,7 @@ export default function AboutSection() {
             transition={{ duration: 0.6 }}
             style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 9, letterSpacing: '0.3em', color: '#B5294E', textTransform: 'uppercase', marginBottom: 12 }}
           >
-            The Strategist
+            The Influencer
           </motion.p>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
