@@ -7,9 +7,9 @@ class Particle {
     this.vel   = { x: 0, y: 0 }
     this.acc   = { x: 0, y: 0 }
     this.target = { x: 0, y: 0 }
-    this.maxSpeed   = 5
-    this.maxForce   = 0.25
-    this.closeEnough = 80
+    this.maxSpeed   = 4
+    this.maxForce   = 0.18
+    this.closeEnough = 60
     this.isKilled   = false
     this.startColor    = { r: 181, g: 41,  b: 78 }
     this.targetColor   = { r: 181, g: 41,  b: 78 }
@@ -71,10 +71,10 @@ const SEQUENCE = [
   { word: 'STRATEGY', sub: 'DATA · PRECISION · RESULTS',     color: { r: 139, g: 111, b: 139 } },
   { word: 'GROWTH',   sub: 'BECAUSE NUMBERS TELL THE TRUTH', color: { r: 26,  g: 18,  b: 24  } },
 ]
-const WORD_HOLD  = 1800
+const WORD_HOLD  = 3200
 const SCATTER_AT = SEQUENCE.length * WORD_HOLD
-const FADE_MS    = 700
-const PIXEL_STEP = 5
+const FADE_MS    = 900
+const PIXEL_STEP = 4
 
 // ─── Component ───────────────────────────────────────────────────────────────
 export default function Preloader({ onComplete }) {
@@ -136,8 +136,8 @@ export default function Preloader({ onComplete }) {
           const d  = Math.sqrt(dx * dx + dy * dy) || 1
           p.pos.x = cx + (dx / d) * mag
           p.pos.y = cy + (dy / d) * mag
-          p.maxSpeed      = Math.random() * 5 + 3
-          p.maxForce      = p.maxSpeed * 0.055
+          p.maxSpeed      = Math.random() * 3 + 2
+          p.maxForce      = p.maxSpeed * 0.05
           p.colorBlendRate = Math.random() * 0.025 + 0.005
           S.current.particles.push(p)
         }
