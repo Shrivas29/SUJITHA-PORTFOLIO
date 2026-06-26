@@ -111,7 +111,7 @@ function TextFragment({ fragment, index }) {
       transition={{ delay: index * 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
       style={{ marginBottom: '2em' }}
     >
-      <p style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(1rem, 1.8vw, 2rem)', fontWeight: 300, lineHeight: 1.6, color: '#8B6F6F', letterSpacing: '0.01em' }}>
+      <p style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(1rem, 1.8vw, 2rem)', fontWeight: 300, lineHeight: 1.6, color: '#5C3D3D', letterSpacing: '0.01em' }}>
         {words.map((word, wi) => {
           const stripped = word.replace(/[—,.'s]/, '')
           const isEm = fragment.em.some(e => e.toLowerCase().split(' ').includes(stripped.toLowerCase()))
@@ -212,7 +212,7 @@ export default function AboutSection() {
             style={{ display: 'flex', flexDirection: 'column', gap: 10 }}
           >
             <SlotDisplay value={value} suffix={suffix} inView={statsInView} index={i} />
-            <div style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.18em', color: '#8B6F6F', textTransform: 'uppercase' }}>
+            <div style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.18em', color: '#5C3D3D', textTransform: 'uppercase' }}>
               {label}
             </div>
           </motion.div>
@@ -233,13 +233,13 @@ export default function AboutSection() {
             style={{
               fontFamily: 'Syncopate, sans-serif',
               fontSize: 8, letterSpacing: '0.15em',
-              color: '#8B6F6F', textTransform: 'uppercase',
+              color: '#5C3D3D', textTransform: 'uppercase',
               border: '1px solid #DDD0C8',
               padding: '8px 14px', borderRadius: 1,
               transition: 'all 0.3s ease',
             }}
             onMouseEnter={e => { e.target.style.borderColor = '#B5294E'; e.target.style.color = '#B5294E' }}
-            onMouseLeave={e => { e.target.style.borderColor = '#DDD0C8'; e.target.style.color = '#8B6F6F' }}
+            onMouseLeave={e => { e.target.style.borderColor = '#DDD0C8'; e.target.style.color = '#5C3D3D' }}
           >
             {skill}
           </span>

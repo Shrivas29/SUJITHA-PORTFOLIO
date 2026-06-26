@@ -46,7 +46,7 @@ function CourseCard({ course, index }) {
       <div style={{ position: 'absolute', inset: 0, zIndex: 2, padding: 'clamp(16px, 2.5vw, 32px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
         {/* Number + age badge */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-          <span style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 'clamp(8px, 0.8vw, 10px)', letterSpacing: '0.2em', color: hovered ? 'rgba(250,247,242,0.5)' : '#8B6F6F', transition: 'color 0.4s ease' }}>
+          <span style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 'clamp(8px, 0.8vw, 10px)', letterSpacing: '0.2em', color: hovered ? 'rgba(250,247,242,0.5)' : '#5C3D3D', transition: 'color 0.4s ease' }}>
             {course.number}
           </span>
           <motion.span
@@ -80,11 +80,11 @@ function CourseCard({ course, index }) {
 
           {/* Meta */}
           <div style={{ display: 'flex', gap: '1.5em', marginTop: '0.6em', alignItems: 'center' }}>
-            <span style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 'clamp(7px, 0.7vw, 9px)', letterSpacing: '0.2em', color: hovered ? 'rgba(237,227,213,0.6)' : '#8B6F6F', textTransform: 'uppercase', transition: 'color 0.4s ease' }}>
+            <span style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 'clamp(7px, 0.7vw, 9px)', letterSpacing: '0.2em', color: hovered ? 'rgba(237,227,213,0.6)' : '#5C3D3D', textTransform: 'uppercase', transition: 'color 0.4s ease' }}>
               {course.duration}
             </span>
             <span style={{ width: 1, height: 10, background: hovered ? 'rgba(237,227,213,0.3)' : '#DDD0C8', transition: 'background 0.4s ease' }} />
-            <span style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(10px, 0.9vw, 12px)', color: hovered ? 'rgba(237,227,213,0.5)' : '#8B6F6F', transition: 'color 0.4s ease' }}>
+            <span style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(10px, 0.9vw, 12px)', color: hovered ? 'rgba(237,227,213,0.5)' : '#5C3D3D', transition: 'color 0.4s ease' }}>
               Online · Live
             </span>
           </div>
@@ -141,7 +141,7 @@ export default function CoursesSection() {
               transition={{ delay: 0.3, duration: 0.8 }}
               style={{ textAlign: 'right' }}
             >
-              <p style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(11px, 1vw, 13px)', color: '#8B6F6F', lineHeight: 1.7, fontWeight: 300 }}>
+              <p style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(11px, 1vw, 13px)', color: '#5C3D3D', lineHeight: 1.7, fontWeight: 300 }}>
                 Digital skills for curious minds.<br />
                 Click any course to explore.
               </p>

@@ -82,7 +82,7 @@ export default function Navigation() {
             zIndex: 1001, display: 'flex', alignItems: 'center', gap: 8,
             fontFamily: 'Syncopate, sans-serif',
             fontSize: 'clamp(7px, 0.7vw, 9px)', letterSpacing: '0.2em',
-            color: '#8B6F6F', textTransform: 'uppercase',
+            color: '#5C3D3D', textTransform: 'uppercase',
           }}
         >
           <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#2E7D32', display: 'inline-block', animation: 'pulse-gold 2s infinite' }} />
@@ -232,7 +232,7 @@ export default function Navigation() {
                 display: 'flex', alignItems: 'center', gap: 8,
                 fontFamily: 'Syncopate, sans-serif',
                 fontSize: 9, letterSpacing: '0.2em',
-                color: '#8B6F6F', textTransform: 'uppercase',
+                color: '#5C3D3D', textTransform: 'uppercase',
               }}
             >
               <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#2E7D32', display: 'inline-block', animation: 'pulse-gold 2s infinite' }} />

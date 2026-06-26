@@ -66,7 +66,7 @@ function TimelineNode({ module, index, accent }) {
               style={{ display: 'flex', alignItems: 'flex-start', gap: 12 }}
             >
               <span style={{ width: 4, height: 4, borderRadius: '50%', background: accent, flexShrink: 0, marginTop: 8 }} />
-              <span style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(14px, 1.2vw, 16px)', color: '#8B6F6F', lineHeight: 1.6, fontWeight: 300 }}>
+              <span style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(14px, 1.2vw, 16px)', color: '#5C3D3D', lineHeight: 1.6, fontWeight: 300 }}>
                 {pt}
               </span>
             </motion.li>
@@ -120,7 +120,7 @@ function ContactForm({ accent }) {
       ) : (
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
           <div>
-            <label style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.25em', color: '#8B6F6F', textTransform: 'uppercase', display: 'block', marginBottom: 8 }}>
+            <label style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.25em', color: '#5C3D3D', textTransform: 'uppercase', display: 'block', marginBottom: 8 }}>
               Your Name
             </label>
             <input
@@ -134,7 +134,7 @@ function ContactForm({ accent }) {
             />
           </div>
           <div>
-            <label style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.25em', color: '#8B6F6F', textTransform: 'uppercase', display: 'block', marginBottom: 8 }}>
+            <label style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.25em', color: '#5C3D3D', textTransform: 'uppercase', display: 'block', marginBottom: 8 }}>
               Email Address
             </label>
             <input
@@ -148,7 +148,7 @@ function ContactForm({ accent }) {
             />
           </div>
           <div>
-            <label style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.25em', color: '#8B6F6F', textTransform: 'uppercase', display: 'block', marginBottom: 8 }}>
+            <label style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.25em', color: '#5C3D3D', textTransform: 'uppercase', display: 'block', marginBottom: 8 }}>
               Message
             </label>
             <textarea
@@ -201,7 +201,7 @@ export default function CoursePage() {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#FAF7F2' }}>
         <div style={{ textAlign: 'center' }}>
-          <p style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '2rem', color: '#8B6F6F' }}>Course not found.</p>
+          <p style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: '2rem', color: '#5C3D3D' }}>Course not found.</p>
           <button onClick={() => navigate('/')} style={{ marginTop: 24, fontFamily: 'Syncopate, sans-serif', fontSize: 9, letterSpacing: '0.25em', color: '#B5294E', background: 'none', border: 'none', cursor: 'pointer', textTransform: 'uppercase' }}>
             ← Back Home
           </button>
@@ -217,9 +217,9 @@ export default function CoursePage() {
       <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100, padding: 'clamp(16px, 2.5vh, 24px) clamp(20px, 4vw, 48px)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(250,247,242,0.92)', backdropFilter: 'blur(16px)', borderBottom: '1px solid #F0EAE1' }}>
         <button
           onClick={() => navigate('/')}
-          style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'Syncopate, sans-serif', fontSize: 9, letterSpacing: '0.2em', color: '#8B6F6F', textTransform: 'uppercase', transition: 'color 0.3s ease' }}
+          style={{ display: 'flex', alignItems: 'center', gap: 10, background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'Syncopate, sans-serif', fontSize: 9, letterSpacing: '0.2em', color: '#5C3D3D', textTransform: 'uppercase', transition: 'color 0.3s ease' }}
           onMouseEnter={e => e.currentTarget.style.color = course.accent}
-          onMouseLeave={e => e.currentTarget.style.color = '#8B6F6F'}
+          onMouseLeave={e => e.currentTarget.style.color = '#5C3D3D'}
         >
           <svg width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M15 5H1M5 1L1 5L5 9"/>
@@ -270,7 +270,7 @@ export default function CoursePage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.18, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          style={{ fontFamily: '"Cormorant Garamond", serif', fontStyle: 'italic', fontSize: 'clamp(1rem, 2.2vw, 2.2rem)', color: '#8B6F6F', maxWidth: 640, lineHeight: 1.5, fontWeight: 300 }}
+          style={{ fontFamily: '"Cormorant Garamond", serif', fontStyle: 'italic', fontSize: 'clamp(1rem, 2.2vw, 2.2rem)', color: '#5C3D3D', maxWidth: 640, lineHeight: 1.5, fontWeight: 300 }}
         >
           {course.tagline}
         </motion.p>
@@ -293,13 +293,13 @@ export default function CoursePage() {
           transition={{ duration: 0.9 }}
           style={{ paddingBottom: 'clamp(48px, 8vh, 96px)', borderBottom: '1px solid #DDD0C8', display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 'clamp(24px, 5vw, 64px)', alignItems: 'center' }}
         >
-          <p style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(15px, 1.3vw, 18px)', color: '#8B6F6F', lineHeight: 1.75, fontWeight: 300 }}>
+          <p style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(15px, 1.3vw, 18px)', color: '#5C3D3D', lineHeight: 1.75, fontWeight: 300 }}>
             {course.description}
           </p>
           <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap' }}>
             {[['Target Age', course.age], ['Duration', course.duration], ['Format', 'Online · Live']].map(([label, val]) => (
               <div key={label} style={{ border: `1px solid ${course.accent}44`, padding: 'clamp(12px, 2vw, 20px) clamp(16px, 2.5vw, 28px)' }}>
-                <p style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.2em', color: '#8B6F6F', textTransform: 'uppercase', marginBottom: 6 }}>{label}</p>
+                <p style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.2em', color: '#5C3D3D', textTransform: 'uppercase', marginBottom: 6 }}>{label}</p>
                 <p style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(1.2rem, 2vw, 1.8rem)', fontWeight: 300, color: '#1A1218' }}>{val}</p>
               </div>
             ))}
@@ -364,7 +364,7 @@ export default function CoursePage() {
               viewport={{ once: true }}
               transition={{ delay: 0.15, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(14px, 1.2vw, 16px)', color: '#8B6F6F', lineHeight: 1.7, marginBottom: 'clamp(24px, 4vh, 40px)', fontWeight: 300 }}>
+              <p style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(14px, 1.2vw, 16px)', color: '#5C3D3D', lineHeight: 1.7, marginBottom: 'clamp(24px, 4vh, 40px)', fontWeight: 300 }}>
                 Interested in <em style={{ fontStyle: 'italic', color: '#1A1218' }}>{course.title}</em>? Send a message and Sujitha will reply within 24 hours.
               </p>
               <ContactForm accent={course.accent} />
@@ -379,7 +379,7 @@ export default function CoursePage() {
               style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(24px, 4vh, 40px)' }}
             >
               <div>
-                <p style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.25em', color: '#8B6F6F', textTransform: 'uppercase', marginBottom: 20 }}>
+                <p style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.25em', color: '#5C3D3D', textTransform: 'uppercase', marginBottom: 20 }}>
                   Or Reach Directly
                 </p>
 
@@ -407,10 +407,10 @@ export default function CoursePage() {
                     </svg>
                   </div>
                   <div>
-                    <p style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.2em', color: '#8B6F6F', textTransform: 'uppercase', marginBottom: 4 }}>Instagram</p>
+                    <p style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.2em', color: '#5C3D3D', textTransform: 'uppercase', marginBottom: 4 }}>Instagram</p>
                     <p style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(1rem, 1.8vw, 1.6rem)', fontWeight: 300, color: '#1A1218', letterSpacing: '0.02em' }}>@godigital8337</p>
                   </div>
-                  <svg style={{ marginLeft: 'auto', flexShrink: 0 }} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B6F6F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <svg style={{ marginLeft: 'auto', flexShrink: 0 }} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C3D3D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M7 17L17 7M17 7H7M17 7V17"/>
                   </svg>
                 </a>
@@ -439,10 +439,10 @@ export default function CoursePage() {
                     </svg>
                   </div>
                   <div>
-                    <p style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.2em', color: '#8B6F6F', textTransform: 'uppercase', marginBottom: 4 }}>WhatsApp</p>
+                    <p style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.2em', color: '#5C3D3D', textTransform: 'uppercase', marginBottom: 4 }}>WhatsApp</p>
                     <p style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(1rem, 1.8vw, 1.6rem)', fontWeight: 300, color: '#1A1218', letterSpacing: '0.02em' }}>+91 97916 74104</p>
                   </div>
-                  <svg style={{ marginLeft: 'auto', flexShrink: 0 }} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B6F6F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <svg style={{ marginLeft: 'auto', flexShrink: 0 }} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C3D3D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M7 17L17 7M17 7H7M17 7V17"/>
                   </svg>
                 </a>
@@ -459,26 +459,26 @@ export default function CoursePage() {
                     transition: 'border-color 0.3s ease',
                     cursor: 'pointer',
                   }}
-                  onMouseEnter={e => { e.currentTarget.style.borderColor = '#8B6F6F' }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = '#5C3D3D' }}
                   onMouseLeave={e => { e.currentTarget.style.borderColor = '#DDD0C8' }}
                 >
                   <div style={{ width: 44, height: 44, borderRadius: '50%', background: '#EDE5DA', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8B6F6F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#5C3D3D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                       <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
                       <polyline points="22,6 12,13 2,6"/>
                     </svg>
                   </div>
                   <div style={{ overflow: 'hidden' }}>
-                    <p style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.2em', color: '#8B6F6F', textTransform: 'uppercase', marginBottom: 4 }}>Email</p>
+                    <p style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.2em', color: '#5C3D3D', textTransform: 'uppercase', marginBottom: 4 }}>Email</p>
                     <p style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(11px, 1.1vw, 14px)', fontWeight: 300, color: '#1A1218', letterSpacing: '0.01em', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>sujitha.stackroute@gmail.com</p>
                   </div>
-                  <svg style={{ marginLeft: 'auto', flexShrink: 0 }} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8B6F6F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <svg style={{ marginLeft: 'auto', flexShrink: 0 }} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5C3D3D" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                     <path d="M7 17L17 7M17 7H7M17 7V17"/>
                   </svg>
                 </a>
               </div>
 
-              <p style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(12px, 1vw, 14px)', color: '#8B6F6F', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic' }}>
+              <p style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(12px, 1vw, 14px)', color: '#5C3D3D', lineHeight: 1.7, fontWeight: 300, fontStyle: 'italic' }}>
                 Sujitha personally responds to every inquiry within 24 hours.
               </p>
             </motion.div>

@@ -161,14 +161,14 @@ export default function ContactSection() {
                 data-cursor={label}
                 style={{
                   display: 'flex', alignItems: 'center', gap: 8,
-                  color: '#8B6F6F', textDecoration: 'none',
+                  color: '#5C3D3D', textDecoration: 'none',
                   fontFamily: 'Syncopate, sans-serif', fontSize: 8,
                   letterSpacing: '0.15em', textTransform: 'uppercase',
                   cursor: 'none',
                   transition: 'color 0.3s ease',
                 }}
                 onMouseEnter={e => e.currentTarget.style.color = '#B5294E'}
-                onMouseLeave={e => e.currentTarget.style.color = '#8B6F6F'}
+                onMouseLeave={e => e.currentTarget.style.color = '#5C3D3D'}
               >
                 {icon}
                 <span>{handle}</span>

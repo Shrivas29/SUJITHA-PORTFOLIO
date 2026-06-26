@@ -102,7 +102,7 @@ function WorkCard({ work, index }) {
           fontFamily: 'Syncopate, sans-serif',
           fontSize: 'clamp(8px, 0.9vw, 11px)',
           letterSpacing: '0.2em',
-          color: hovered ? 'rgba(250,247,242,0.5)' : '#8B6F6F',
+          color: hovered ? 'rgba(250,247,242,0.5)' : '#5C3D3D',
           transition: 'color 0.4s ease',
         }}>
           {work.id}
@@ -151,7 +151,7 @@ function WorkCard({ work, index }) {
               fontFamily: 'Syncopate, sans-serif',
               fontSize: 'clamp(7px, 0.75vw, 9px)',
               letterSpacing: '0.2em',
-              color: hovered ? 'rgba(237,227,213,0.6)' : '#8B6F6F',
+              color: hovered ? 'rgba(237,227,213,0.6)' : '#5C3D3D',
               textTransform: 'uppercase',
               transition: 'color 0.4s ease',
             }}>
@@ -161,7 +161,7 @@ function WorkCard({ work, index }) {
             <span style={{
               fontFamily: '"Space Grotesk", sans-serif',
               fontSize: 'clamp(10px, 0.9vw, 12px)',
-              color: hovered ? 'rgba(237,227,213,0.5)' : '#8B6F6F',
+              color: hovered ? 'rgba(237,227,213,0.5)' : '#5C3D3D',
               transition: 'color 0.4s ease',
             }}>
               {work.year}
@@ -221,7 +221,7 @@ export default function WorksSection() {
               transition={{ delay: 0.3, duration: 0.8 }}
               style={{ textAlign: 'right' }}
             >
-              <p style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(11px, 1vw, 13px)', color: '#8B6F6F', lineHeight: 1.7, fontWeight: 300 }}>
+              <p style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(11px, 1vw, 13px)', color: '#5C3D3D', lineHeight: 1.7, fontWeight: 300 }}>
                 SEO. PPC. Content.<br />
                 Growth, by the numbers.
               </p>
@@ -274,11 +274,11 @@ export default function WorksSection() {
           transition={{ delay: 0.4, duration: 0.8 }}
           style={{ marginTop: '6vh', display: 'flex', justifyContent: 'flex-end', alignItems: 'center', gap: 16 }}
         >
-          <span style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 9, letterSpacing: '0.25em', color: '#8B6F6F', textTransform: 'uppercase' }}>
+          <span style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 9, letterSpacing: '0.25em', color: '#5C3D3D', textTransform: 'uppercase' }}>
             View all works
           </span>
           <svg width="32" height="1" aria-hidden="true">
-            <line x1="0" y1="0.5" x2="32" y2="0.5" stroke="#8B6F6F" strokeWidth="1"/>
+            <line x1="0" y1="0.5" x2="32" y2="0.5" stroke="#5C3D3D" strokeWidth="1"/>
           </svg>
         </motion.div>
       </div>

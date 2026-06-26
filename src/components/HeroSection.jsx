@@ -145,7 +145,7 @@ export default function HeroSection() {
           fontFamily: 'Syncopate, sans-serif',
           fontSize: 'clamp(8px, 1.6vw, 12px)',
           letterSpacing: isMobile ? '0.18em' : '0.35em',
-          color: '#8B6F6F',
+          color: '#5C3D3D',
           textTransform: 'uppercase',
           lineHeight: isMobile ? 2 : 1,
         }}>
@@ -210,7 +210,7 @@ export default function HeroSection() {
           animate={{ y: [0, 5, 0] }}
           transition={{ duration: 1, repeat: Infinity, ease: 'easeInOut' }}
           width="14" height="16" viewBox="0 0 14 16"
-          fill="none" stroke="#8B6F6F" strokeWidth="1.5"
+          fill="none" stroke="#5C3D3D" strokeWidth="1.5"
           strokeLinecap="round" strokeLinejoin="round"
         >
           <path d="M7 1 L7 12 M3 9 L7 13 L11 9" />

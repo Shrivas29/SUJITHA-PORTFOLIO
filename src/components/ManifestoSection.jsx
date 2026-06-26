@@ -35,7 +35,7 @@ function ManifestoLine({ words, big, index }) {
         fontSize: big ? 'clamp(3rem, 9vw, 11rem)' : 'clamp(1.1rem, 2.8vw, 3.8rem)',
         fontWeight: big ? 300 : 300,
         fontStyle: big ? 'normal' : 'italic',
-        color: big ? '#1A1218' : '#8B6F6F',
+        color: big ? '#1A1218' : '#5C3D3D',
         letterSpacing: big ? '-0.02em' : '0.02em',
         display: 'block',
       }}>
@@ -58,7 +58,7 @@ export default function ManifestoSection() {
       <div style={{ overflow: 'hidden', borderTop: '1px solid #DDD0C8', borderBottom: '1px solid #DDD0C8', padding: '14px 0', marginBottom: '10vh' }}>
         <div className="marquee-track">
           {[...Array(4)].map((_, k) => (
-            <span key={k} style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 'clamp(8px, 0.9vw, 11px)', letterSpacing: '0.28em', color: '#8B6F6F', paddingRight: '4em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+            <span key={k} style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 'clamp(8px, 0.9vw, 11px)', letterSpacing: '0.28em', color: '#5C3D3D', paddingRight: '4em', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
               {MARQUEE_TEXT}
             </span>
           ))}
@@ -93,7 +93,7 @@ export default function ManifestoSection() {
       >
         <span style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: isMobile ? '3rem' : 'clamp(5rem, 12vw, 14rem)', fontWeight: 300, color: '#DDD0C8', lineHeight: 0.8, flexShrink: 0 }}>&ldquo;</span>
         <div>
-          <p style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(1rem, 2.4vw, 3rem)', fontStyle: 'italic', color: '#8B6F6F', lineHeight: 1.55, fontWeight: 300 }}>
+          <p style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(1rem, 2.4vw, 3rem)', fontStyle: 'italic', color: '#5C3D3D', lineHeight: 1.55, fontWeight: 300 }}>
             I believe that behind every great marketing campaign lies a truth worth telling — and the data to prove it. My work lives at the intersection of analytical precision and human storytelling, where numbers become narratives and strategy becomes growth.
           </p>
           <p style={{ marginTop: '1.5em', fontFamily: 'Syncopate, sans-serif', fontSize: 9, letterSpacing: '0.3em', color: '#B5294E', textTransform: 'uppercase' }}>
