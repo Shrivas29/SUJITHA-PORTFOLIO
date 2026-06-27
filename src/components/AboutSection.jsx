@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react'
-import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { useRef, useState, useEffect } from 'react'
+import { motion, useInView, useScroll, useTransform, useMotionValue, animate } from 'framer-motion'
 import { useBreakpoint } from '../hooks/useBreakpoint'
 
 const STATS = [
@@ -23,78 +23,74 @@ const FRAGMENTS = [
   },
 ]
 
-// 50-char reel string — each digit 0-9 appears 5 times
-const REEL = '01234567890123456789012345678901234567890123456789'
+function StatCounter({ value, suffix, label, index, inView }) {
+  const count = useMotionValue(0)
+  const [display, setDisplay] = useState(0)
 
-function DigitReel({ digit, delay, inView }) {
-  const targetIdx = REEL.lastIndexOf(digit)
-  return (
-    <div style={{ height: '1em', overflow: 'hidden', display: 'inline-block', verticalAlign: 'top' }}>
-      <motion.div
-        initial={{ y: 0 }}
-        animate={inView ? { y: `${-targetIdx}em` } : { y: 0 }}
-        transition={{ delay, duration: 1.9, ease: [0.06, 0.88, 0.14, 1] }}
-      >
-        {REEL.split('').map((d, i) => (
-          <div key={i} style={{ height: '1em', lineHeight: '1em', textAlign: 'center' }}>{d}</div>
-        ))}
-      </motion.div>
-    </div>
-  )
-}
-
-function SlotDisplay({ value, suffix, inView, index }) {
-  const digits = String(value).split('')
-  const suffixDelay = index * 0.3 + digits.length * 0.06 + 1.9
+  useEffect(() => {
+    if (!inView) return
+    const controls = animate(count, value, {
+      duration: 1.8,
+      delay: index * 0.18,
+      ease: [0.16, 1, 0.3, 1],
+    })
+    const unsub = count.on('change', v => setDisplay(Math.round(v)))
+    return () => { controls.stop(); unsub() }
+  }, [inView, value, index, count])
 
   return (
-    <div style={{
-      position: 'relative',
-      display: 'inline-flex',
-      background: '#130e11',
-      border: '1px solid rgba(181,41,78,0.3)',
-      boxShadow: '0 0 28px rgba(181,41,78,0.08), inset 0 0 16px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.03)',
-      padding: '10px 16px 10px',
-      alignItems: 'center',
-      overflow: 'hidden',
-      minWidth: 54,
-      justifyContent: 'center',
-    }}>
-      {/* Horizontal scan lines */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.09) 2px, rgba(0,0,0,0.09) 3px)',
-        pointerEvents: 'none', zIndex: 2,
-      }} />
-      {/* Bottom accent line */}
-      <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: 1, background: 'rgba(181,41,78,0.35)', zIndex: 3 }} />
-
-      {/* Digit reels */}
-      <div style={{
-        fontFamily: '"Courier New", "Lucida Console", monospace',
-        fontSize: 'clamp(2rem, 3.5vw, 4.5rem)',
-        fontWeight: 700,
-        color: '#ff7096',
-        lineHeight: 1,
-        fontVariantNumeric: 'tabular-nums',
-        display: 'flex',
-        alignItems: 'flex-start',
-        zIndex: 1,
-        textShadow: '0 0 18px rgba(255,112,150,0.55)',
-      }}>
-        {digits.map((d, i) => (
-          <DigitReel key={i} digit={d} delay={index * 0.3 + i * 0.06} inView={inView} />
-        ))}
-        <motion.span
-          initial={{ opacity: 0 }}
-          animate={inView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ delay: suffixDelay, duration: 0.25 }}
-          style={{ fontSize: '0.5em', alignSelf: 'flex-start', marginTop: '0.12em', marginLeft: 2, color: '#B5294E' }}
-        >
+    <motion.div
+      initial={{ opacity: 0, y: 24 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ delay: index * 0.18, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
+    >
+      {/* Number */}
+      <div style={{ display: 'flex', alignItems: 'flex-start', lineHeight: 1 }}>
+        <span style={{
+          fontFamily: '"Cormorant Garamond", serif',
+          fontSize: 'clamp(3.5rem, 6vw, 7rem)',
+          fontWeight: 300,
+          color: '#B5294E',
+          letterSpacing: '-0.03em',
+          lineHeight: 0.9,
+          fontStyle: 'italic',
+        }}>
+          {display}
+        </span>
+        <span style={{
+          fontFamily: '"Cormorant Garamond", serif',
+          fontSize: 'clamp(1.6rem, 2.8vw, 3.2rem)',
+          fontWeight: 300,
+          color: '#B5294E',
+          lineHeight: 1,
+          marginTop: '0.15em',
+          fontStyle: 'italic',
+        }}>
           {suffix}
-        </motion.span>
+        </span>
       </div>
-    </div>
+
+      {/* Accent rule */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={inView ? { scaleX: 1 } : {}}
+        transition={{ delay: index * 0.18 + 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        style={{ height: 1, background: 'linear-gradient(90deg, #B5294E, transparent)', transformOrigin: 'left', width: '100%', opacity: 0.5 }}
+      />
+
+      {/* Label */}
+      <p style={{
+        fontFamily: 'Syncopate, sans-serif',
+        fontSize: 'clamp(7px, 0.7vw, 9px)',
+        letterSpacing: '0.25em',
+        color: '#5C3D3D',
+        textTransform: 'uppercase',
+        fontWeight: 400,
+      }}>
+        {label}
+      </p>
+    </motion.div>
   )
 }
 
@@ -201,21 +197,10 @@ export default function AboutSection() {
         <TextFragment key={i} fragment={frag} index={i} />
       ))}
 
-      {/* Stats — slot machine display */}
-      <div ref={statsRef} style={{ display: 'flex', gap: 'clamp(14px, 3vw, 36px)', marginTop: '3em', marginBottom: '3em', paddingTop: '2em', borderTop: '1px solid #DDD0C8', flexWrap: 'wrap' }}>
+      {/* Stats */}
+      <div ref={statsRef} style={{ display: 'flex', gap: 'clamp(32px, 6vw, 72px)', marginTop: '3em', marginBottom: '3em', paddingTop: '2em', borderTop: '1px solid #DDD0C8', flexWrap: 'wrap' }}>
         {STATS.map(({ value, suffix, label }, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            animate={statsInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: i * 0.3, duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            style={{ display: 'flex', flexDirection: 'column', gap: 10 }}
-          >
-            <SlotDisplay value={value} suffix={suffix} inView={statsInView} index={i} />
-            <div style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.18em', color: '#5C3D3D', textTransform: 'uppercase' }}>
-              {label}
-            </div>
-          </motion.div>
+          <StatCounter key={i} value={value} suffix={suffix} label={label} index={i} inView={statsInView} />
         ))}
       </div>
 
