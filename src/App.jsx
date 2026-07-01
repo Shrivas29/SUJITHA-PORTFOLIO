@@ -13,6 +13,7 @@ import CoursesSection   from './components/CoursesSection'
 import AboutSection     from './components/AboutSection'
 import ContactSection   from './components/ContactSection'
 import CoursePage       from './pages/CoursePage'
+import TunnelReveal     from './components/TunnelReveal'
 
 export default function App() {
   const [loading, setLoading] = useState(true)
@@ -56,16 +57,16 @@ export default function App() {
             style={{ position: 'relative', zIndex: 1 }}
           >
             <Navigation />
-            <main>
+            <main style={{ perspective: '1400px', perspectiveOrigin: '50% 40%' }}>
               <HeroSection />
               {hr}
-              <ManifestoSection />
+              <TunnelReveal><ManifestoSection /></TunnelReveal>
               {hr}
-              <CoursesSection />
+              <TunnelReveal><CoursesSection /></TunnelReveal>
               {hr}
-              <AboutSection />
+              <TunnelReveal><AboutSection /></TunnelReveal>
               {hr}
-              <ContactSection />
+              <TunnelReveal><ContactSection /></TunnelReveal>
             </main>
           </motion.div>
         )}
