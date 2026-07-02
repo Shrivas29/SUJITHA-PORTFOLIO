@@ -19,7 +19,7 @@ export default function HeroSection() {
   const scrollTo = (id) => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
 
   return (
-    <section id="hero" className="h-screen w-full" style={{ padding: 'var(--frame-gap)' }}>
+    <section id="hero" className="w-full" style={{ height: '100svh', padding: 'var(--frame-gap)' }}>
       <div className="relative h-full w-full overflow-hidden rounded-2xl md:rounded-[2rem]">
 
         {/* Background — her photo with a slow cinematic zoom (or video when VIDEO_SRC is set) */}
@@ -65,7 +65,7 @@ export default function HeroSection() {
                   href={`#${id}`}
                   onClick={(e) => { e.preventDefault(); scrollTo(id) }}
                   onMouseEnter={() => setHoveredNav(id)}
-                  className="relative whitespace-nowrap rounded-full px-3 py-2 text-[10px] sm:text-xs md:px-6 md:text-sm"
+                  className="relative whitespace-nowrap rounded-full px-2.5 py-3 text-[11px] sm:text-xs md:px-6 md:py-2 md:text-sm"
                   style={{
                     cursor: 'pointer',
                     display: 'inline-flex',
@@ -120,8 +120,8 @@ export default function HeroSection() {
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 0.5, ease: EXPO }}
-                className="text-xs text-primary/70 sm:text-sm md:text-base"
-                style={{ lineHeight: 1.2 }}
+                className="text-sm text-primary/70 md:text-base"
+                style={{ lineHeight: 1.35 }}
               >
                 Sujitha M is a digital marketing influencer and mentor —
                 turning data into growth for brands and teaching the next

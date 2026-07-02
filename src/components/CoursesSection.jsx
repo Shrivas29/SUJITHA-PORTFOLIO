@@ -10,6 +10,86 @@ function CourseCard({ course, index }) {
   const ref    = useRef(null)
   const inView = useInView(ref, { margin: '-5%', once: true })
   const navigate = useNavigate()
+  const { isMobile } = useBreakpoint()
+
+  // Touch has no hover — mobile card is compact with everything visible
+  if (isMobile) {
+    return (
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 40 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.8, ease: EXPO }}
+        onClick={() => navigate(`/courses/${course.id}`)}
+        role="link"
+        aria-label={`${course.title} course details`}
+        style={{
+          position: 'relative',
+          border: '1px solid var(--hairline)',
+          borderRadius: 16,
+          background: 'var(--surface)',
+          padding: '20px 20px 22px',
+          cursor: 'pointer',
+        }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 22 }}>
+          <span className="label" style={{ fontSize: 10, letterSpacing: '0.12em', color: 'var(--cream-35)' }}>
+            ({course.number})
+          </span>
+          <span className="label" style={{
+            fontSize: 9,
+            color: 'var(--cream-55)',
+            border: '1px solid var(--hairline)',
+            padding: '5px 12px', borderRadius: 99,
+          }}>
+            Ages {course.age}
+          </span>
+        </div>
+
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 12 }}>
+          <h3 style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: '1.45rem',
+            fontWeight: 500,
+            letterSpacing: '-0.03em',
+            color: 'var(--cream)',
+            lineHeight: 1.05,
+            margin: 0,
+          }}>
+            {course.title}
+          </h3>
+          <span style={{
+            width: 34, height: 34, borderRadius: '50%',
+            border: '1px solid var(--hairline)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            flexShrink: 0,
+          }}>
+            <ArrowIcon size={13} direction="up-right" />
+          </span>
+        </div>
+
+        <p style={{
+          fontSize: 13,
+          fontWeight: 300,
+          color: 'var(--cream-55)',
+          lineHeight: 1.55,
+          margin: '10px 0 16px',
+        }}>
+          {course.tagline}
+        </p>
+
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+          <span className="label" style={{ fontSize: 9, letterSpacing: '0.1em', whiteSpace: 'nowrap', color: 'var(--cream-55)' }}>
+            {course.duration}
+          </span>
+          <span style={{ width: 1, height: 10, background: 'rgba(225,224,204,0.25)', flexShrink: 0 }} />
+          <span className="label" style={{ fontSize: 9, letterSpacing: '0.1em', whiteSpace: 'nowrap', color: 'var(--cream-35)' }}>
+            Online · Live
+          </span>
+        </div>
+      </motion.div>
+    )
+  }
 
   return (
     <motion.div

@@ -112,7 +112,9 @@ export default function Preloader({ onComplete }) {
 
       const pixels = oc.getImageData(0, 0, canvas.width, canvas.height).data
       const coords = []
-      for (let i = 0; i < pixels.length; i += PIXEL_STEP * 4) {
+      // Fewer particles on small screens — phones can't push as many fill rects per frame
+      const step = canvas.width < 768 ? PIXEL_STEP + 2 : PIXEL_STEP
+      for (let i = 0; i < pixels.length; i += step * 4) {
         if (pixels[i + 3] > 0) coords.push(i)
       }
       for (let i = coords.length - 1; i > 0; i--) {
