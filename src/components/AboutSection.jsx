@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react'
 import { motion, useInView, useScroll, useTransform, useMotionValue, animate } from 'framer-motion'
 import { useBreakpoint } from '../hooks/useBreakpoint'
+import { WordsPullUp, FadeUp, EXPO } from './motion/Primitives'
 
 const STATS = [
   { value: 3,  suffix: '+', label: 'Years of Experience' },
@@ -23,6 +24,8 @@ const FRAGMENTS = [
   },
 ]
 
+const SKILLS = ['SEO', 'SEM', 'PPC', 'Google Analytics', 'Content Marketing', 'Email Marketing', 'E-commerce', 'Amazon Ads', 'Digital Strategy', 'Campaign Management']
+
 function StatCounter({ value, suffix, label, index, inView }) {
   const count = useMotionValue(0)
   const [display, setDisplay] = useState(0)
@@ -32,7 +35,7 @@ function StatCounter({ value, suffix, label, index, inView }) {
     const controls = animate(count, value, {
       duration: 1.8,
       delay: index * 0.18,
-      ease: [0.16, 1, 0.3, 1],
+      ease: EXPO,
     })
     const unsub = count.on('change', v => setDisplay(Math.round(v)))
     return () => { controls.stop(); unsub() }
@@ -42,52 +45,41 @@ function StatCounter({ value, suffix, label, index, inView }) {
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: index * 0.18, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ delay: index * 0.18, duration: 0.8, ease: EXPO }}
       style={{ display: 'flex', flexDirection: 'column', gap: 12 }}
     >
-      {/* Number */}
       <div style={{ display: 'flex', alignItems: 'flex-start', lineHeight: 1 }}>
         <span style={{
-          fontFamily: '"Cormorant Garamond", serif',
-          fontSize: 'clamp(3.5rem, 6vw, 7rem)',
-          fontWeight: 300,
-          color: '#B5294E',
-          letterSpacing: '-0.03em',
+          fontFamily: 'var(--font-display)',
+          fontSize: 'clamp(3.2rem, 5.5vw, 6.2rem)',
+          fontWeight: 500,
+          color: 'var(--cream)',
+          letterSpacing: '-0.05em',
           lineHeight: 0.9,
-          fontStyle: 'italic',
         }}>
           {display}
         </span>
         <span style={{
-          fontFamily: '"Cormorant Garamond", serif',
-          fontSize: 'clamp(1.6rem, 2.8vw, 3.2rem)',
+          fontFamily: 'var(--font-serif)',
+          fontSize: 'clamp(1.5rem, 2.6vw, 3rem)',
           fontWeight: 300,
-          color: '#B5294E',
-          lineHeight: 1,
-          marginTop: '0.15em',
           fontStyle: 'italic',
+          color: 'var(--accent)',
+          lineHeight: 1,
+          marginTop: '0.1em',
         }}>
           {suffix}
         </span>
       </div>
 
-      {/* Accent rule */}
       <motion.div
         initial={{ scaleX: 0 }}
         animate={inView ? { scaleX: 1 } : {}}
-        transition={{ delay: index * 0.18 + 0.4, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        style={{ height: 1, background: 'linear-gradient(90deg, #B5294E, transparent)', transformOrigin: 'left', width: '100%', opacity: 0.5 }}
+        transition={{ delay: index * 0.18 + 0.4, duration: 0.8, ease: EXPO }}
+        style={{ height: 1, background: 'linear-gradient(90deg, var(--accent-soft), transparent)', transformOrigin: 'left', width: '100%' }}
       />
 
-      {/* Label */}
-      <p style={{
-        fontFamily: 'Syncopate, sans-serif',
-        fontSize: 'clamp(7px, 0.7vw, 9px)',
-        letterSpacing: '0.25em',
-        color: '#5C3D3D',
-        textTransform: 'uppercase',
-        fontWeight: 400,
-      }}>
+      <p className="label" style={{ fontSize: 'clamp(8px, 0.7vw, 10px)' }}>
         {label}
       </p>
     </motion.div>
@@ -104,16 +96,22 @@ function TextFragment({ fragment, index }) {
       ref={ref}
       initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: index * 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-      style={{ marginBottom: '2em' }}
+      transition={{ delay: index * 0.12, duration: 0.9, ease: EXPO }}
+      style={{ marginBottom: '1.8em' }}
     >
-      <p style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(1rem, 1.8vw, 2rem)', fontWeight: 300, lineHeight: 1.6, color: '#5C3D3D', letterSpacing: '0.01em' }}>
+      <p style={{
+        fontSize: 'clamp(1rem, 1.5vw, 1.45rem)',
+        fontWeight: 300,
+        lineHeight: 1.6,
+        color: 'var(--cream-55)',
+        letterSpacing: '0.005em',
+      }}>
         {words.map((word, wi) => {
           const stripped = word.replace(/[—,.'s]/, '')
           const isEm = fragment.em.some(e => e.toLowerCase().split(' ').includes(stripped.toLowerCase()))
           return (
             <span key={wi}>
-              <span style={{ color: isEm ? '#1A1218' : 'inherit' }}>{word}</span>
+              <span style={{ color: isEm ? 'var(--cream)' : 'inherit', fontWeight: isEm ? 400 : 300 }}>{word}</span>
               {wi < words.length - 1 ? ' ' : ''}
             </span>
           )
@@ -123,7 +121,7 @@ function TextFragment({ fragment, index }) {
   )
 }
 
-function PhotoPortrait({ src, alt, delay = 0 }) {
+function PhotoPortrait({ src, alt }) {
   const ref    = useRef(null)
   const inView = useInView(ref, { once: true, margin: '-5%' })
   const [loaded, setLoaded] = useState(false)
@@ -131,48 +129,46 @@ function PhotoPortrait({ src, alt, delay = 0 }) {
   return (
     <motion.div
       ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-      style={{ position: 'relative', overflow: 'hidden', width: '100%' }}
+      initial={{ opacity: 0, y: 40, scale: 0.98 }}
+      animate={inView ? { opacity: 1, y: 0, scale: 1 } : {}}
+      transition={{ duration: 1.1, ease: EXPO }}
+      style={{
+        position: 'relative',
+        overflow: 'hidden',
+        width: '100%', height: '100%',
+        borderRadius: 'clamp(14px, 1.5vw, 22px)',
+        border: '1px solid var(--hairline)',
+        background: 'var(--surface)',
+      }}
     >
-      {/* Earthy colour tint frame */}
+      {/* Bottom scrim */}
       <div style={{
         position: 'absolute', inset: 0, zIndex: 1,
-        background: 'linear-gradient(to bottom, transparent 55%, rgba(250,247,242,0.85) 100%)',
-        pointerEvents: 'none',
-      }} />
-      {/* Subtle side vignette */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 1,
-        background: 'linear-gradient(to right, rgba(250,247,242,0.3) 0%, transparent 20%, transparent 80%, rgba(250,247,242,0.3) 100%)',
+        background: 'linear-gradient(to bottom, transparent 60%, rgba(12,10,9,0.55) 100%)',
         pointerEvents: 'none',
       }} />
       <img
         src={src}
         alt={alt}
+        loading="lazy"
         onLoad={() => setLoaded(true)}
         style={{
-          width: '100%',
-          height: '100%',
+          width: '100%', height: '100%',
           objectFit: 'cover',
           objectPosition: 'center top',
           display: 'block',
-          filter: loaded ? 'sepia(15%) contrast(1.05) brightness(0.92)' : 'none',
+          filter: loaded ? 'brightness(0.9) saturate(0.92)' : 'none',
           transition: 'filter 0.8s ease, opacity 0.6s ease',
           opacity: loaded ? 1 : 0,
         }}
       />
-      {/* Placeholder while loading */}
       {!loaded && (
         <div style={{
           position: 'absolute', inset: 0,
-          background: '#F0EAE1',
+          background: 'var(--surface-2)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
-          <span style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 9, letterSpacing: '0.2em', color: '#DDD0C8', textTransform: 'uppercase' }}>
-            Loading
-          </span>
+          <span className="label" style={{ color: 'var(--cream-35)' }}>Loading</span>
         </div>
       )}
     </motion.div>
@@ -183,13 +179,10 @@ export default function AboutSection() {
   const ref         = useRef(null)
   const statsRef    = useRef(null)
   const statsInView = useInView(statsRef, { once: true, margin: '-10%' })
-  const headerRef   = useRef(null)
-  const headerView  = useInView(headerRef, { once: true, margin: '-5%' })
   const { isMobile } = useBreakpoint()
 
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const photoY  = useTransform(scrollYProgress, [0, 1], ['-6%', '6%'])
-  const photo2Y = useTransform(scrollYProgress, [0, 1], ['4%', '-4%'])
+  const photoY = useTransform(scrollYProgress, [0, 1], ['-4%', '4%'])
 
   const content = (
     <div style={{ paddingTop: isMobile ? '2vh' : '4vh' }}>
@@ -198,49 +191,59 @@ export default function AboutSection() {
       ))}
 
       {/* Stats */}
-      <div ref={statsRef} style={{ display: 'flex', gap: 'clamp(32px, 6vw, 72px)', marginTop: '3em', marginBottom: '3em', paddingTop: '2em', borderTop: '1px solid #DDD0C8', flexWrap: 'wrap' }}>
+      <div ref={statsRef} style={{
+        display: 'flex',
+        gap: 'clamp(32px, 6vw, 72px)',
+        marginTop: '3em', marginBottom: '3em',
+        paddingTop: '2.5em',
+        borderTop: '1px solid var(--hairline)',
+        flexWrap: 'wrap',
+      }}>
         {STATS.map(({ value, suffix, label }, i) => (
           <StatCounter key={i} value={value} suffix={suffix} label={label} index={i} inView={statsInView} />
         ))}
       </div>
 
       {/* Skills */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: '-10%' }}
-        transition={{ delay: 0.3, duration: 0.8 }}
-        style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: '3em' }}
-      >
-        {['SEO', 'SEM', 'PPC', 'Google Analytics', 'Content Marketing', 'Email Marketing', 'E-commerce', 'Amazon Ads', 'Digital Strategy', 'Campaign Management'].map(skill => (
+      <FadeUp delay={0.2} style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: '3em' }}>
+        {SKILLS.map(skill => (
           <span
             key={skill}
+            className="label"
             style={{
-              fontFamily: 'Syncopate, sans-serif',
-              fontSize: 8, letterSpacing: '0.15em',
-              color: '#5C3D3D', textTransform: 'uppercase',
-              border: '1px solid #DDD0C8',
-              padding: '8px 14px', borderRadius: 1,
+              fontSize: 9,
+              color: 'var(--cream-55)',
+              border: '1px solid var(--hairline)',
+              padding: '10px 16px', borderRadius: 99,
               transition: 'all 0.3s ease',
+              cursor: 'default',
             }}
-            onMouseEnter={e => { e.target.style.borderColor = '#B5294E'; e.target.style.color = '#B5294E' }}
-            onMouseLeave={e => { e.target.style.borderColor = '#DDD0C8'; e.target.style.color = '#5C3D3D' }}
+            onMouseEnter={e => { e.target.style.borderColor = 'var(--accent)'; e.target.style.color = 'var(--accent)' }}
+            onMouseLeave={e => { e.target.style.borderColor = 'rgba(225,224,204,0.14)'; e.target.style.color = 'rgba(225,224,204,0.55)' }}
           >
             {skill}
           </span>
         ))}
-      </motion.div>
+      </FadeUp>
 
       {/* Pull quote */}
       <motion.blockquote
         initial={{ opacity: 0, x: 20 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, margin: '-10%' }}
-        transition={{ delay: 0.2, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-        style={{ borderLeft: '1px solid #B5294E', paddingLeft: 'clamp(16px, 2vw, 28px)' }}
+        transition={{ delay: 0.2, duration: 0.9, ease: EXPO }}
+        style={{ borderLeft: '1px solid var(--accent)', paddingLeft: 'clamp(16px, 2vw, 28px)' }}
       >
-        <p style={{ fontFamily: '"Cormorant Garamond", serif', fontStyle: 'italic', fontSize: 'clamp(1.1rem, 2vw, 2.2rem)', fontWeight: 300, color: '#1A1218', lineHeight: 1.5 }}>
-          "I don't just run campaigns — I build growth engines. Every decision is backed by data, every strategy built to last."
+        <p style={{
+          fontFamily: 'var(--font-serif)',
+          fontStyle: 'italic',
+          fontSize: 'clamp(1.15rem, 1.9vw, 1.9rem)',
+          fontWeight: 300,
+          color: 'var(--cream)',
+          lineHeight: 1.5,
+        }}>
+          "I don't just run campaigns — I build growth engines. Every decision
+          is backed by data, every strategy built to last."
         </p>
       </motion.blockquote>
     </div>
@@ -249,13 +252,12 @@ export default function AboutSection() {
   const photos = (
     <div style={{
       position: isMobile ? 'relative' : 'sticky',
-      top: isMobile ? 'auto' : '10vh',
+      top: isMobile ? 'auto' : '12vh',
     }}>
       <motion.div style={{ y: isMobile ? 0 : photoY, aspectRatio: '3/4' }}>
         <PhotoPortrait
           src="/images/sujitha-work.jpg"
           alt="Sujitha M working at her laptop by a window"
-          delay={0}
         />
       </motion.div>
     </div>
@@ -263,38 +265,36 @@ export default function AboutSection() {
 
   return (
     <section id="about" ref={ref} className="section" style={{ padding: '12vh 0' }}>
-      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 clamp(16px, 5vw, 80px)' }}>
+      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 clamp(16px, 5vw, 80px)' }}>
 
         {/* Header */}
-        <div ref={headerRef} style={{ marginBottom: '8vh' }}>
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={headerView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-            style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 9, letterSpacing: '0.3em', color: '#B5294E', textTransform: 'uppercase', marginBottom: 12 }}
-          >
-            The Influencer
-          </motion.p>
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={headerView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(2.5rem, 6vw, 7rem)', fontWeight: 300, color: '#1A1218', letterSpacing: '-0.02em', lineHeight: 0.9 }}
-          >
-            About
-          </motion.h2>
+        <div style={{ marginBottom: '7vh' }}>
+          <FadeUp>
+            <p className="label" style={{ color: 'var(--accent)', marginBottom: 16 }}>
+              The Influencer
+            </p>
+          </FadeUp>
+          <h2 style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(2.6rem, 7.5vw, 7.5rem)',
+            fontWeight: 500,
+            letterSpacing: '-0.05em',
+            color: 'var(--cream)',
+            lineHeight: 0.92,
+            margin: 0,
+          }}>
+            <WordsPullUp text="About" />
+          </h2>
         </div>
 
-        <div className="hr-gold" style={{ marginBottom: '8vh' }} />
+        <div className="hr-line" style={{ marginBottom: '7vh' }} />
 
         {isMobile ? (
-          /* Mobile: content first, photos below */
           <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(32px, 6vw, 60px)' }}>
             {content}
             {photos}
           </div>
         ) : (
-          /* Desktop/Tablet: side-by-side */
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 'clamp(32px, 5vw, 80px)', alignItems: 'start' }}>
             {photos}
             {content}

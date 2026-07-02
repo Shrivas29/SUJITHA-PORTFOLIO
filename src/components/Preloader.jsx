@@ -11,8 +11,8 @@ class Particle {
     this.maxForce   = 0.18
     this.closeEnough = 60
     this.isKilled   = false
-    this.startColor    = { r: 181, g: 41,  b: 78 }
-    this.targetColor   = { r: 181, g: 41,  b: 78 }
+    this.startColor    = { r: 240, g: 78,  b: 35 }
+    this.targetColor   = { r: 240, g: 78,  b: 35 }
     this.colorWeight   = 1
     this.colorBlendRate = 0.018
   }
@@ -59,7 +59,7 @@ class Particle {
       b: Math.round(this.startColor.b + (this.targetColor.b - this.startColor.b) * this.colorWeight),
     }
     this.startColor  = bl
-    this.targetColor = { r: 250, g: 247, b: 242 }
+    this.targetColor = { r: 12, g: 10, b: 9 }
     this.colorWeight = 0
     this.isKilled    = true
   }
@@ -67,9 +67,9 @@ class Particle {
 
 // ─── Sequence ────────────────────────────────────────────────────────────────
 const SEQUENCE = [
-  { word: 'SUJITHA',  sub: 'DIGITAL MARKETING INFLUENCER',   color: { r: 181, g: 41,  b: 78  } },
-  { word: 'STRATEGY', sub: 'DATA · PRECISION · RESULTS',     color: { r: 139, g: 111, b: 139 } },
-  { word: 'GROWTH',   sub: 'BECAUSE NUMBERS TELL THE TRUTH', color: { r: 26,  g: 18,  b: 24  } },
+  { word: 'SUJITHA',  sub: 'DIGITAL MARKETING INFLUENCER',   color: { r: 225, g: 224, b: 204 } },
+  { word: 'STRATEGY', sub: 'DATA · PRECISION · RESULTS',     color: { r: 240, g: 78,  b: 35 } },
+  { word: 'GROWTH',   sub: 'BECAUSE NUMBERS TELL THE TRUTH', color: { r: 225, g: 224, b: 204 } },
 ]
 const WORD_HOLD  = 3200
 const SCATTER_AT = SEQUENCE.length * WORD_HOLD
@@ -159,7 +159,7 @@ export default function Preloader({ onComplete }) {
     }
 
     const animate = () => {
-      ctx.fillStyle = 'rgba(250,247,242,0.84)'
+      ctx.fillStyle = 'rgba(12,10,9,0.84)'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
       for (let i = S.current.particles.length - 1; i >= 0; i--) {
         const p = S.current.particles[i]
@@ -210,7 +210,7 @@ export default function Preloader({ onComplete }) {
   return (
     <div style={{
       position: 'fixed', inset: 0, zIndex: 9999,
-      background: '#FAF7F2',
+      background: '#0C0A09',
       opacity,
       transition: `opacity ${FADE_MS}ms cubic-bezier(0.16,1,0.3,1)`,
     }}>
@@ -223,10 +223,11 @@ export default function Preloader({ onComplete }) {
         pointerEvents: 'none',
       }}>
         <p style={{
-          fontFamily: 'Syncopate, sans-serif',
-          fontSize: 'clamp(7px, 0.75vw, 10px)',
+          fontFamily: '"Space Grotesk", sans-serif',
+          fontWeight: 500,
+          fontSize: 'clamp(8px, 0.8vw, 11px)',
           letterSpacing: '0.4em',
-          color: '#B5294E',
+          color: '#F04E23',
           textTransform: 'uppercase',
           opacity: subShow ? 0.85 : 0,
           transition: 'opacity 0.35s ease',
@@ -235,10 +236,10 @@ export default function Preloader({ onComplete }) {
         </p>
 
         {/* Progress line */}
-        <div style={{ width: 'clamp(80px, 12vw, 160px)', height: 1, background: '#DDD0C8', position: 'relative', overflow: 'hidden' }}>
+        <div style={{ width: 'clamp(80px, 12vw, 160px)', height: 1, background: 'rgba(225,224,204,0.18)', position: 'relative', overflow: 'hidden' }}>
           <div style={{
             position: 'absolute', inset: 0,
-            background: '#B5294E',
+            background: '#E1E0CC',
             transformOrigin: 'left',
             animation: `plProgress ${SCATTER_AT + 250}ms linear forwards`,
           }} />

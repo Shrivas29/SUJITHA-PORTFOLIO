@@ -34,8 +34,8 @@ export default function DottedSurface({ opacity = 1 }) {
           0,
           iy * SEPARATION - (AMOUNTY * SEPARATION) / 2
         )
-        // Warm near-black with a hint of rose — readable on cream #FAF7F2
-        colors.push(0.18, 0.08, 0.12)
+        // Warm cream — visible but quiet on near-black #0C0A09
+        colors.push(0.88, 0.88, 0.8)
       }
     }
 

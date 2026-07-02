@@ -3,6 +3,7 @@ import { motion, useInView, AnimatePresence } from 'framer-motion'
 import { useNavigate } from 'react-router-dom'
 import { COURSES } from '../data/courses'
 import { useBreakpoint } from '../hooks/useBreakpoint'
+import { WordsPullUp, FadeUp, ArrowIcon, EXPO } from './motion/Primitives'
 
 function CourseCard({ course, index }) {
   const [hovered, setHovered] = useState(false)
@@ -15,7 +16,7 @@ function CourseCard({ course, index }) {
       ref={ref}
       initial={{ opacity: 0, y: 50 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ delay: (index % 3) * 0.1, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ delay: (index % 3) * 0.1, duration: 0.9, ease: EXPO }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       onClick={() => navigate(`/courses/${course.id}`)}
@@ -23,36 +24,42 @@ function CourseCard({ course, index }) {
       style={{
         position: 'relative',
         aspectRatio: '4/3',
-        border: '1px solid #DDD0C8',
+        border: '1px solid var(--hairline)',
+        borderRadius: 'clamp(14px, 1.5vw, 22px)',
         overflow: 'hidden',
         cursor: 'pointer',
-        background: '#EDE5DA',
+        background: 'var(--surface)',
       }}
     >
-      {/* Hover colour overlay */}
+      {/* Hover flood — solid cream, editorial invert */}
       <motion.div
         animate={{ opacity: hovered ? 1 : 0, y: hovered ? '0%' : '100%' }}
-        transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-        style={{ position: 'absolute', inset: 0, background: course.color, zIndex: 1 }}
+        transition={{ duration: 0.55, ease: EXPO }}
+        style={{ position: 'absolute', inset: 0, background: 'var(--cream)', zIndex: 1 }}
       />
 
-      {/* Subtle bg texture */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 0,
-        background: `radial-gradient(ellipse 60% 60% at ${30 + index * 12}% ${40 + index * 7}%, rgba(181,41,78,0.05) 0%, transparent 70%)`,
-      }} />
-
       {/* Content */}
-      <div style={{ position: 'absolute', inset: 0, zIndex: 2, padding: 'clamp(16px, 2.5vw, 32px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div style={{ position: 'absolute', inset: 0, zIndex: 2, padding: 'clamp(18px, 2.5vw, 32px)', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
         {/* Number + age badge */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-          <span style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 'clamp(8px, 0.8vw, 10px)', letterSpacing: '0.2em', color: hovered ? 'rgba(250,247,242,0.5)' : '#5C3D3D', transition: 'color 0.4s ease' }}>
-            {course.number}
+          <span className="label" style={{
+            fontSize: 'clamp(9px, 0.8vw, 11px)',
+            letterSpacing: '0.12em',
+            color: hovered ? 'rgba(12,10,9,0.55)' : 'var(--cream-35)',
+            transition: 'color 0.4s ease',
+          }}>
+            ({course.number})
           </span>
           <motion.span
             animate={{ opacity: hovered ? 1 : 0, y: hovered ? 0 : -8 }}
             transition={{ duration: 0.3, delay: 0.05 }}
-            style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 8, letterSpacing: '0.15em', color: 'rgba(250,247,242,0.7)', textTransform: 'uppercase', border: '1px solid rgba(250,247,242,0.25)', padding: '4px 10px', borderRadius: 99 }}
+            className="label"
+            style={{
+              fontSize: 9,
+              color: 'rgba(12,10,9,0.8)',
+              border: '1px solid rgba(12,10,9,0.35)',
+              padding: '5px 12px', borderRadius: 99,
+            }}
           >
             Ages {course.age}
           </motion.span>
@@ -67,39 +74,72 @@ function CourseCard({ course, index }) {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.35, delay: 0.08 }}
-                style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(12px, 1vw, 14px)', color: 'rgba(237,227,213,0.75)', lineHeight: 1.6, marginBottom: '1.2em', fontWeight: 300, maxWidth: '88%' }}
+                style={{
+                  fontSize: 'clamp(12px, 1vw, 14px)',
+                  color: 'rgba(12,10,9,0.72)',
+                  lineHeight: 1.55, marginBottom: '1.2em',
+                  fontWeight: 400, maxWidth: '90%',
+                }}
               >
                 {course.description.slice(0, 110)}…
               </motion.p>
             )}
           </AnimatePresence>
 
-          <h3 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(1.4rem, 2.6vw, 3.2rem)', fontWeight: 300, color: hovered ? '#FAF7F2' : '#1A1218', lineHeight: 1.05, letterSpacing: '-0.01em', transition: 'color 0.4s ease' }}>
+          <h3 style={{
+            fontFamily: 'var(--font-display)',
+            fontSize: 'clamp(1.3rem, 2.3vw, 2.6rem)',
+            fontWeight: 500,
+            letterSpacing: '-0.035em',
+            color: hovered ? '#0C0A09' : 'var(--cream)',
+            lineHeight: 1.05,
+            transition: 'color 0.4s ease',
+          }}>
             {course.title}
           </h3>
 
           {/* Meta */}
-          <div style={{ display: 'flex', gap: '1.5em', marginTop: '0.6em', alignItems: 'center' }}>
-            <span style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 'clamp(7px, 0.7vw, 9px)', letterSpacing: '0.2em', color: hovered ? 'rgba(237,227,213,0.6)' : '#5C3D3D', textTransform: 'uppercase', transition: 'color 0.4s ease' }}>
+          <div style={{ display: 'flex', gap: 14, marginTop: '0.8em', alignItems: 'center' }}>
+            <span className="label" style={{
+              fontSize: 'clamp(9px, 0.75vw, 11px)',
+              letterSpacing: '0.1em',
+              whiteSpace: 'nowrap',
+              color: hovered ? 'rgba(12,10,9,0.65)' : 'var(--cream-55)',
+              transition: 'color 0.4s ease',
+            }}>
               {course.duration}
             </span>
-            <span style={{ width: 1, height: 10, background: hovered ? 'rgba(237,227,213,0.3)' : '#DDD0C8', transition: 'background 0.4s ease' }} />
-            <span style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(10px, 0.9vw, 12px)', color: hovered ? 'rgba(237,227,213,0.5)' : '#5C3D3D', transition: 'color 0.4s ease' }}>
+            <span style={{ width: 1, height: 11, background: hovered ? 'rgba(12,10,9,0.3)' : 'rgba(225,224,204,0.25)', flexShrink: 0, transition: 'background 0.4s ease' }} />
+            <span className="label" style={{
+              fontSize: 'clamp(9px, 0.75vw, 11px)',
+              letterSpacing: '0.1em',
+              whiteSpace: 'nowrap',
+              color: hovered ? 'rgba(12,10,9,0.5)' : 'var(--cream-35)',
+              transition: 'color 0.4s ease',
+            }}>
               Online · Live
             </span>
           </div>
         </div>
       </div>
 
-      {/* Arrow on hover */}
+      {/* Arrow circle on hover */}
       <motion.div
-        animate={{ opacity: hovered ? 1 : 0, x: hovered ? 0 : -8 }}
-        transition={{ duration: 0.28, delay: 0.06 }}
-        style={{ position: 'absolute', top: 'clamp(16px,2.5vw,32px)', right: 'clamp(16px,2.5vw,32px)', zIndex: 3 }}
+        animate={{
+          opacity: hovered ? 1 : 0,
+          scale: hovered ? 1 : 0.6,
+        }}
+        transition={{ duration: 0.3, delay: 0.06, ease: EXPO }}
+        style={{
+          position: 'absolute',
+          top: 'clamp(14px, 2vw, 26px)', right: 'clamp(14px, 2vw, 26px)',
+          zIndex: 3,
+          width: 42, height: 42, borderRadius: '50%',
+          background: '#0C0A09',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}
       >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M7 17L17 7M17 7H7M17 7V17" stroke="rgba(237,227,213,0.8)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
+        <ArrowIcon size={16} direction="up-right" />
       </motion.div>
     </motion.div>
   )
@@ -111,74 +151,63 @@ export default function CoursesSection() {
   const { isMobile, isTablet } = useBreakpoint()
 
   return (
-    <section id="works" className="section" style={{ padding: '12vh 0' }}>
-      <div style={{ maxWidth: '1400px', margin: '0 auto', padding: '0 clamp(16px, 5vw, 80px)' }}>
+    <section id="courses" className="section" style={{ padding: '12vh 0' }}>
+      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 clamp(16px, 5vw, 80px)' }}>
 
         {/* Header */}
-        <div ref={headerRef} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '6vh', flexWrap: 'wrap', gap: 16 }}>
+        <div ref={headerRef} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '7vh', flexWrap: 'wrap', gap: 16 }}>
           <div>
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6 }}
-              style={{ fontFamily: 'Syncopate, sans-serif', fontSize: 9, letterSpacing: '0.3em', color: '#B5294E', textTransform: 'uppercase', marginBottom: 12 }}
+              className="label"
+              style={{ color: 'var(--accent)', marginBottom: 16 }}
             >
-              Online Courses · Ages 10+
+              Online courses · Ages 10+
             </motion.p>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 'clamp(2.5rem, 6vw, 7rem)', fontWeight: 300, color: '#1A1218', letterSpacing: '-0.02em', lineHeight: 0.9 }}
-            >
-              The Courses
-            </motion.h2>
+            <h2 style={{
+              fontFamily: 'var(--font-display)',
+              fontSize: 'clamp(2.6rem, 7.5vw, 7.5rem)',
+              fontWeight: 500,
+              letterSpacing: '-0.05em',
+              color: 'var(--cream)',
+              lineHeight: 0.92,
+              margin: 0,
+            }}>
+              <WordsPullUp text="The Courses" />
+            </h2>
           </div>
           {!isMobile && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={inView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              style={{ textAlign: 'right' }}
-            >
-              <p style={{ fontFamily: '"Space Grotesk", sans-serif', fontSize: 'clamp(11px, 1vw, 13px)', color: '#5C3D3D', lineHeight: 1.7, fontWeight: 300 }}>
+            <FadeUp delay={0.3} style={{ textAlign: 'right', paddingBottom: 8 }}>
+              <p style={{ fontSize: 'clamp(12px, 1vw, 14px)', color: 'var(--cream-55)', lineHeight: 1.7, fontWeight: 300 }}>
                 Digital skills for curious minds.<br />
                 Click any course to explore.
               </p>
-            </motion.div>
+            </FadeUp>
           )}
         </div>
 
-        <div className="hr-gold" style={{ marginBottom: '6vh' }} />
+        <div className="hr-line" style={{ marginBottom: '7vh' }} />
 
         {/* Grid */}
         {isMobile ? (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
             {COURSES.map((c, i) => <CourseCard key={c.id} course={c} index={i} />)}
           </div>
         ) : isTablet ? (
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
             {COURSES.map((c, i) => <CourseCard key={c.id} course={c} index={i} />)}
           </div>
         ) : (
-          /* Desktop: 3-col asymmetric */
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2 }}>
-            {/* Row 1: large + 2 small */}
-            <div style={{ gridColumn: '1', gridRow: '1', aspectRatio: '3/4' }}>
-              <CourseCard course={COURSES[0]} index={0} />
-            </div>
-            <div style={{ gridColumn: '2/4', gridRow: '1', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
-              <CourseCard course={COURSES[1]} index={1} />
-              <CourseCard course={COURSES[2]} index={2} />
-            </div>
-            {/* Row 2: 2 small + large */}
-            <div style={{ gridColumn: '1/3', gridRow: '2', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 2 }}>
-              <CourseCard course={COURSES[3]} index={3} />
-              <CourseCard course={COURSES[4]} index={4} />
-            </div>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: 12 }}>
+            <div style={{ gridColumn: 'span 3' }}><CourseCard course={COURSES[0]} index={0} /></div>
+            <div style={{ gridColumn: 'span 3' }}><CourseCard course={COURSES[1]} index={1} /></div>
+            <div style={{ gridColumn: 'span 2' }}><CourseCard course={COURSES[2]} index={2} /></div>
+            <div style={{ gridColumn: 'span 2' }}><CourseCard course={COURSES[3]} index={3} /></div>
+            <div style={{ gridColumn: 'span 2' }}><CourseCard course={COURSES[4]} index={4} /></div>
           </div>
         )}
-
       </div>
     </section>
   )

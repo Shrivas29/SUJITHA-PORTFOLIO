@@ -7,7 +7,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-spring/web": "^10.1.2",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "@visx/pattern": "^4.0.0",
+    "@visx/scale": "^4.0.0",
+    "@visx/shape": "^4.0.0",
+    "@visx/vendor": "^4.0.0",
     "framer-motion": "^12.40.0",
+    "lucide-react": "^1.23.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-router-dom": "^7.18.0",

@@ -9,6 +9,7 @@ export const COURSES = [
     duration: '4 Weeks · 2 Days/Week',
     color: 'linear-gradient(135deg, #B5294E 0%, #7A1030 100%)',
     accent: '#B5294E',
+    accentDark: '#E0526F',
     modules: [
       {
         week: 'Week 01',
@@ -42,6 +43,7 @@ export const COURSES = [
     duration: '4 Weeks · 2 Days/Week',
     color: 'linear-gradient(135deg, #9B6E8B 0%, #6B3E6B 100%)',
     accent: '#9B6E8B',
+    accentDark: '#C596BC',
     modules: [
       {
         week: 'Week 01',
@@ -75,6 +77,7 @@ export const COURSES = [
     duration: '4 Weeks · 2 Days/Week',
     color: 'linear-gradient(135deg, #C87060 0%, #8B4050 100%)',
     accent: '#C87060',
+    accentDark: '#E39784',
     modules: [
       {
         week: 'Week 01',
@@ -108,6 +111,7 @@ export const COURSES = [
     duration: '4 Weeks · 2 Days/Week',
     color: 'linear-gradient(135deg, #8B2950 0%, #5A1030 100%)',
     accent: '#8B2950',
+    accentDark: '#D65C87',
     modules: [
       {
         week: 'Week 01',
@@ -141,6 +145,7 @@ export const COURSES = [
     duration: '4 Weeks · 2 Days/Week',
     color: 'linear-gradient(135deg, #7A4E7A 0%, #4A2450 100%)',
     accent: '#7A4E7A',
+    accentDark: '#B287B2',
     modules: [
       {
         week: 'Week 01',

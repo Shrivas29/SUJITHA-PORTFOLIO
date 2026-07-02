@@ -5,55 +5,52 @@ export default function Cursor() {
   const mouseX = useMotionValue(-100)
   const mouseY = useMotionValue(-100)
 
-  const x = useSpring(mouseX, { stiffness: 500, damping: 40, mass: 0.3 })
-  const y = useSpring(mouseY, { stiffness: 500, damping: 40, mass: 0.3 })
+  const x = useSpring(mouseX, { stiffness: 650, damping: 45, mass: 0.25 })
+  const y = useSpring(mouseY, { stiffness: 650, damping: 45, mass: 0.25 })
 
-  const [state, setState] = useState('default') // 'default' | 'hover' | 'click'
-  const [label, setLabel] = useState('')
-  const [hidden, setHidden] = useState(false)
+  const [hovered, setHovered] = useState(false)
+  const [label, setLabel]     = useState('')
+  const [down, setDown]       = useState(false)
+  const [hidden, setHidden]   = useState(false)
 
   useEffect(() => {
-    const onMove  = (e) => { mouseX.set(e.clientX); mouseY.set(e.clientY) }
+    const onMove = (e) => { mouseX.set(e.clientX); mouseY.set(e.clientY) }
+
+    // Event delegation — one listener, no per-element binding, no observer leaks
+    const onOver = (e) => {
+      const target = e.target.closest?.('a, button, [data-cursor]')
+      if (target) {
+        setHovered(true)
+        setLabel(target.dataset?.cursor || '')
+      } else {
+        setHovered(false)
+        setLabel('')
+      }
+    }
+
     const onEnter = () => setHidden(false)
     const onLeave = () => setHidden(true)
-    const onDown  = () => setState(s => s === 'hover' ? 'hover' : 'click')
-    const onUp    = () => setState(s => s === 'hover' ? 'hover' : 'default')
+    const onDown  = () => setDown(true)
+    const onUp    = () => setDown(false)
 
-    window.addEventListener('mousemove', onMove)
-    document.addEventListener('mouseenter', onEnter)
-    document.addEventListener('mouseleave', onLeave)
+    window.addEventListener('mousemove', onMove, { passive: true })
+    document.addEventListener('mouseover', onOver, { passive: true })
+    document.documentElement.addEventListener('mouseenter', onEnter)
+    document.documentElement.addEventListener('mouseleave', onLeave)
     window.addEventListener('mousedown', onDown)
     window.addEventListener('mouseup', onUp)
 
-    const bind = () => {
-      document.querySelectorAll('a, button, [data-cursor]').forEach(el => {
-        el.addEventListener('mouseenter', () => {
-          setState('hover')
-          setLabel(el.dataset.cursor || '')
-        })
-        el.addEventListener('mouseleave', () => {
-          setState('default')
-          setLabel('')
-        })
-      })
-    }
-
-    bind()
-    const observer = new MutationObserver(bind)
-    observer.observe(document.body, { childList: true, subtree: true })
-
     return () => {
       window.removeEventListener('mousemove', onMove)
-      document.removeEventListener('mouseenter', onEnter)
-      document.removeEventListener('mouseleave', onLeave)
+      document.removeEventListener('mouseover', onOver)
+      document.documentElement.removeEventListener('mouseenter', onEnter)
+      document.documentElement.removeEventListener('mouseleave', onLeave)
       window.removeEventListener('mousedown', onDown)
       window.removeEventListener('mouseup', onUp)
-      observer.disconnect()
     }
   }, [mouseX, mouseY])
 
-  const isHover = state === 'hover'
-  const isClick = state === 'click'
+  const showLabel = hovered && label
 
   return (
     <motion.div
@@ -62,8 +59,7 @@ export default function Cursor() {
         position: 'fixed',
         top: 0, left: 0,
         pointerEvents: 'none',
-        zIndex: 9999,
-        mixBlendMode: 'exclusion',
+        zIndex: 10000,
       }}
       animate={{ opacity: hidden ? 0 : 1 }}
       transition={{ duration: 0.2 }}
@@ -71,39 +67,37 @@ export default function Cursor() {
     >
       <motion.div
         animate={{
-          width:  isHover && label ? 'auto' : isHover ? 72 : isClick ? 28 : 44,
-          height: isHover ? 44 : isClick ? 28 : 44,
-          borderRadius: isHover && label ? 999 : '50%',
-          scale: isClick ? 0.85 : 1,
+          width:  showLabel ? 'auto' : hovered ? 40 : down ? 9 : 12,
+          height: showLabel ? 34 : hovered ? 40 : down ? 9 : 12,
+          borderRadius: 999,
         }}
-        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
         style={{
-          background: '#fff',
           transform: 'translate(-50%, -50%)',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          minWidth: isHover && label ? 80 : undefined,
-          paddingLeft:  isHover && label ? 20 : 0,
-          paddingRight: isHover && label ? 20 : 0,
+          background: hovered && !showLabel ? 'rgba(225,224,204,0.16)' : '#E1E0CC',
+          border: hovered && !showLabel ? '1.5px solid #E1E0CC' : '1px solid rgba(12,10,9,0.5)',
+          boxShadow: '0 1px 10px rgba(0,0,0,0.45)',
+          paddingLeft:  showLabel ? 16 : 0,
+          paddingRight: showLabel ? 16 : 0,
           overflow: 'hidden',
-          willChange: 'transform',
+          whiteSpace: 'nowrap',
         }}
       >
-        {isHover && label && (
+        {showLabel && (
           <motion.span
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
+            transition={{ duration: 0.16 }}
             style={{
-              fontFamily: 'Syncopate, sans-serif',
-              fontSize: 8,
-              letterSpacing: '0.15em',
-              color: '#FAF7F2',
+              fontFamily: '"Space Grotesk", sans-serif',
+              fontWeight: 500,
+              fontSize: 10,
+              letterSpacing: '0.1em',
+              color: '#0C0A09',
               textTransform: 'uppercase',
-              whiteSpace: 'nowrap',
-              mixBlendMode: 'normal',
             }}
           >
             {label}
